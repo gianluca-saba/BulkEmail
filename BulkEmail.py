@@ -97,18 +97,19 @@ class MainForm(QtWidgets.QMainWindow, Ui_MainForm.Ui_MainWindow):
             "*.csv",
             "*.csv")
         
-        with open(fileName, newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=';', quotechar='"')
-            for row in reader:
-                self.newContact()
-                
-                item = QtWidgets.QTableWidgetItem()
-                item.setText(row[0])
-                self.tbwContacts.setItem(self.tbwContacts.rowCount() -1, 0, item)
-                
-                item = QtWidgets.QTableWidgetItem()
-                item.setText(row[1])
-                self.tbwContacts.setItem(self.tbwContacts.rowCount() -1, 1, item)
+        if fileName:
+            with open(fileName, newline='') as csvfile:
+                reader = csv.reader(csvfile, delimiter=';', quotechar='"')
+                for row in reader:
+                    self.newContact()
+                    
+                    item = QtWidgets.QTableWidgetItem()
+                    item.setText(row[0])
+                    self.tbwContacts.setItem(self.tbwContacts.rowCount() -1, 0, item)
+                    
+                    item = QtWidgets.QTableWidgetItem()
+                    item.setText(row[1])
+                    self.tbwContacts.setItem(self.tbwContacts.rowCount() -1, 1, item)
 
     def saveContacts(self):
         '''Salva i contatti della QTableWidget in un file csv'''
